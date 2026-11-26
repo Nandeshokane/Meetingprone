@@ -1,254 +1,608 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fillViewport="true"
-    android:background="#F5F7FA">
+    android:background="#0B1120">
 
-    <LinearLayout
+    <!-- NORMAL / SETUP / ATTENDEE / HOST VIEW -->
+    <ScrollView
+        android:id="@+id/menuLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:orientation="vertical"
-        android:padding="24dp">
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:overScrollMode="never">
 
-        <!-- NORMAL / SETUP / HOST MENU -->
         <LinearLayout
-            android:id="@+id/menuLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:paddingHorizontal="20dp"
+            android:paddingTop="32dp"
+            android:paddingBottom="32dp">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="MeetingLock"
-                android:textColor="#1A237E"
-                android:textSize="28sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Pixel 7a Prototype"
-                android:textColor="#546E7A"
-                android:textSize="14sp"
-                android:layout_marginBottom="20dp" />
-
-            <!-- Permission Status Box -->
+            <!-- App Brand Header -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#FFFFFF"
-                android:elevation="2dp"
-                android:orientation="vertical"
-                android:padding="16dp"
-                android:layout_marginBottom="16dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="ONE-TIME SETUP"
-                    android:textColor="#37474F"
-                    android:textSize="12sp"
-                    android:textStyle="bold"
-                    android:layout_marginBottom="8dp" />
-
-                <TextView
-                    android:id="@+id/tvAccessibilityStatus"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Accessibility Lock: NOT ENABLED"
-                    android:textColor="#C62828"
-                    android:textSize="14sp"
-                    android:textStyle="bold" />
-
-                <Button
-                    android:id="@+id/btnEnableAccessibility"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="6dp"
-                    android:text="1. Enable Accessibility Service" />
-
-                <TextView
-                    android:id="@+id/tvOverlayStatus"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="12dp"
-                    android:text="Display Over Other Apps: NOT ENABLED"
-                    android:textColor="#C62828"
-                    android:textSize="14sp"
-                    android:textStyle="bold" />
-
-                <Button
-                    android:id="@+id/btnEnableOverlay"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="6dp"
-                    android:text="2. Allow Display Over Other Apps" />
-            </LinearLayout>
-
-            <!-- Attendee Section -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="#FFFFFF"
-                android:elevation="2dp"
-                android:orientation="vertical"
-                android:padding="16dp"
-                android:layout_marginBottom="16dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="ATTENDEE MODE"
-                    android:textColor="#37474F"
-                    android:textSize="12sp"
-                    android:textStyle="bold"
-                    android:layout_marginBottom="8dp" />
-
-                <Button
-                    android:id="@+id/btnScanLockQr"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:backgroundTint="#1565C0"
-                    android:text="Scan Host Lock QR" />
-
-                <Button
-                    android:id="@+id/btnQuickTest"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:backgroundTint="#00838F"
-                    android:text="Quick 60-Second Self-Test" />
-            </LinearLayout>
-
-            <!-- Host Section -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="#FFFFFF"
-                android:elevation="2dp"
-                android:orientation="vertical"
-                android:padding="16dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="HOST MODE (MEETING HEAD)"
-                    android:textColor="#37474F"
-                    android:textSize="12sp"
-                    android:textStyle="bold"
-                    android:layout_marginBottom="8dp" />
-
-                <EditText
-                    android:id="@+id/etDurationMin"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Meeting duration in minutes (e.g. 30)"
-                    android:inputType="number"
-                    android:text="5" />
-
-                <Button
-                    android:id="@+id/btnHostGenerate"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:backgroundTint="#2E7D32"
-                    android:text="Generate Lock QR Code" />
-
-                <Button
-                    android:id="@+id/btnHostShowUnlock"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:backgroundTint="#EF6C00"
-                    android:text="Show Unlock QR Code"
-                    android:visibility="gone" />
-
-                <TextView
-                    android:id="@+id/tvQrLabel"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="12dp"
-                    android:gravity="center"
-                    android:textColor="#263238"
-                    android:textStyle="bold"
-                    android:visibility="gone" />
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:layout_marginBottom="20dp">
 
                 <ImageView
-                    android:id="@+id/ivQrCode"
-                    android:layout_width="240dp"
-                    android:layout_height="240dp"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="8dp"
-                    android:contentDescription="QR Code"
-                    android:visibility="gone" />
-            </LinearLayout>
-        </LinearLayout>
+                    android:layout_width="44dp"
+                    android:layout_height="44dp"
+                    android:src="@drawable/ic_lock_app"
+                    android:contentDescription="MeetingLock Logo" />
 
-        <!-- LOCKED SCREEN VIEW -->
-        <LinearLayout
-            android:id="@+id/lockedLayout"
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginStart="12dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="MeetingLock"
+                        android:textColor="#F8FAFC"
+                        android:textSize="22sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="High-Security Session Lockdown"
+                        android:textColor="#94A3B8"
+                        android:textSize="12sp" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/tvHeaderStatusBadge"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_pill_status"
+                    android:paddingHorizontal="12dp"
+                    android:paddingVertical="6dp"
+                    android:text="SETUP NEEDED"
+                    android:textColor="#F87171"
+                    android:textSize="11sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <!-- Compact Permissions Banner (shown when both enabled) -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardPermissionsReady"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:visibility="gone"
+                app:cardBackgroundColor="#0F2922"
+                app:cardCornerRadius="14dp"
+                app:cardElevation="0dp"
+                app:strokeColor="#10B981"
+                app:strokeWidth="1dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingHorizontal="16dp"
+                    android:paddingVertical="12dp">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Lockdown Shield &amp; Overlay Active"
+                        android:textColor="#34D399"
+                        android:textSize="13sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/btnManagePermissions"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Settings"
+                        android:textColor="#94A3B8"
+                        android:textSize="12sp"
+                        android:padding="4dp" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Setup Card (shown until permissions are enabled) -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardSetupPermissions"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="18dp"
+                app:cardBackgroundColor="#111827"
+                app:cardCornerRadius="18dp"
+                app:cardElevation="0dp"
+                app:strokeColor="#1F2937"
+                app:strokeWidth="1dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="18dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="REQUIRED SETUP (ONE-TIME)"
+                        android:textColor="#94A3B8"
+                        android:textSize="11sp"
+                        android:letterSpacing="0.08"
+                        android:textStyle="bold"
+                        android:layout_marginBottom="12dp" />
+
+                    <TextView
+                        android:id="@+id/tvAccessibilityStatus"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Accessibility Shield: NOT ENABLED"
+                        android:textColor="#F87171"
+                        android:textSize="13sp"
+                        android:textStyle="bold" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnEnableAccessibility"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:layout_marginTop="6dp"
+                        android:text="1. Enable Accessibility Service"
+                        android:textAllCaps="false"
+                        android:textColor="#FFFFFF"
+                        app:backgroundTint="#1E293B"
+                        app:cornerRadius="12dp"
+                        app:strokeColor="#334155"
+                        app:strokeWidth="1dp" />
+
+                    <TextView
+                        android:id="@+id/tvOverlayStatus"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="14dp"
+                        android:text="Display Over Other Apps: NOT ENABLED"
+                        android:textColor="#F87171"
+                        android:textSize="13sp"
+                        android:textStyle="bold" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnEnableOverlay"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:layout_marginTop="6dp"
+                        android:text="2. Allow Display Over Other Apps"
+                        android:textAllCaps="false"
+                        android:textColor="#FFFFFF"
+                        app:backgroundTint="#1E293B"
+                        app:cornerRadius="12dp"
+                        app:strokeColor="#334155"
+                        app:strokeWidth="1dp" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Segmented Mode Switcher: Attendee / Host -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:background="@drawable/bg_input_dark"
+                android:orientation="horizontal"
+                android:padding="4dp"
+                android:layout_marginBottom="18dp">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/tabAttendee"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp"
+                    android:text="Attendee"
+                    android:textAllCaps="false"
+                    android:textColor="#FFFFFF"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    app:backgroundTint="#2563EB"
+                    app:cornerRadius="9dp" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/tabHost"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp"
+                    android:text="Host (Meeting Head)"
+                    android:textAllCaps="false"
+                    android:textColor="#94A3B8"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    app:backgroundTint="#00000000"
+                    app:cornerRadius="9dp" />
+            </LinearLayout>
+
+            <!-- ATTENDEE PANEL -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/panelAttendee"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardBackgroundColor="#111827"
+                app:cardCornerRadius="20dp"
+                app:cardElevation="0dp"
+                app:strokeColor="#1F2937"
+                app:strokeWidth="1dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="20dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Join Restricted Session"
+                        android:textColor="#F8FAFC"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="6dp"
+                        android:layout_marginBottom="20dp"
+                        android:text="Scan the host's QR code to lock your phone down. Only Phone Calls and SMS Messages remain accessible until unlocked."
+                        android:textColor="#94A3B8"
+                        android:textSize="13sp"
+                        android:lineSpacingExtra="3dp" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnScanLockQr"
+                        android:layout_width="match_parent"
+                        android:layout_height="56dp"
+                        android:text="Scan Host Lock QR"
+                        android:textAllCaps="false"
+                        android:textColor="#FFFFFF"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        app:backgroundTint="#2563EB"
+                        app:cornerRadius="14dp"
+                        app:icon="@drawable/ic_qr_scan"
+                        app:iconGravity="textStart"
+                        app:iconPadding="10dp"
+                        app:iconTint="#FFFFFF" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnQuickTest"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_marginTop="12dp"
+                        android:text="Quick 60-Second Self-Test"
+                        android:textAllCaps="false"
+                        android:textColor="#38BDF8"
+                        android:textSize="14sp"
+                        app:backgroundTint="#0F172A"
+                        app:cornerRadius="14dp"
+                        app:strokeColor="#1E3A5F"
+                        app:strokeWidth="1dp" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- HOST PANEL -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/panelHost"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                app:cardBackgroundColor="#111827"
+                app:cardCornerRadius="20dp"
+                app:cardElevation="0dp"
+                app:strokeColor="#1F2937"
+                app:strokeWidth="1dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="20dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Create Meeting Session"
+                        android:textColor="#F8FAFC"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:layout_marginBottom="16dp"
+                        android:text="Set a session duration and generate a Lock QR for attendees."
+                        android:textColor="#94A3B8"
+                        android:textSize="13sp" />
+
+                    <!-- Quick Duration Preset Buttons -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginBottom="12dp">
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btnPreset5"
+                            android:layout_width="0dp"
+                            android:layout_height="40dp"
+                            android:layout_weight="1"
+                            android:layout_marginEnd="6dp"
+                            android:insetTop="0dp"
+                            android:insetBottom="0dp"
+                            android:text="5m"
+                            android:textColor="#E2E8F0"
+                            app:backgroundTint="#1E293B"
+                            app:cornerRadius="10dp" />
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btnPreset15"
+                            android:layout_width="0dp"
+                            android:layout_height="40dp"
+                            android:layout_weight="1"
+                            android:layout_marginEnd="6dp"
+                            android:insetTop="0dp"
+                            android:insetBottom="0dp"
+                            android:text="15m"
+                            android:textColor="#E2E8F0"
+                            app:backgroundTint="#1E293B"
+                            app:cornerRadius="10dp" />
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btnPreset30"
+                            android:layout_width="0dp"
+                            android:layout_height="40dp"
+                            android:layout_weight="1"
+                            android:layout_marginEnd="6dp"
+                            android:insetTop="0dp"
+                            android:insetBottom="0dp"
+                            android:text="30m"
+                            android:textColor="#E2E8F0"
+                            app:backgroundTint="#1E293B"
+                            app:cornerRadius="10dp" />
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btnPreset60"
+                            android:layout_width="0dp"
+                            android:layout_height="40dp"
+                            android:layout_weight="1"
+                            android:insetTop="0dp"
+                            android:insetBottom="0dp"
+                            android:text="60m"
+                            android:textColor="#E2E8F0"
+                            app:backgroundTint="#1E293B"
+                            app:cornerRadius="10dp" />
+                    </LinearLayout>
+
+                    <EditText
+                        android:id="@+id/etDurationMin"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:background="@drawable/bg_input_dark"
+                        android:hint="Custom duration (minutes)"
+                        android:inputType="number"
+                        android:paddingHorizontal="14dp"
+                        android:text="5"
+                        android:textColor="#F8FAFC"
+                        android:textColorHint="#64748B"
+                        android:textSize="15sp" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnHostGenerate"
+                        android:layout_width="match_parent"
+                        android:layout_height="54dp"
+                        android:layout_marginTop="14dp"
+                        android:text="Generate Lock QR Code"
+                        android:textAllCaps="false"
+                        android:textColor="#FFFFFF"
+                        android:textSize="15sp"
+                        android:textStyle="bold"
+                        app:backgroundTint="#16A34A"
+                        app:cornerRadius="14dp" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnHostShowUnlock"
+                        android:layout_width="match_parent"
+                        android:layout_height="54dp"
+                        android:layout_marginTop="10dp"
+                        android:text="Show Unlock QR Code"
+                        android:textAllCaps="false"
+                        android:textColor="#FFFFFF"
+                        android:textSize="15sp"
+                        android:textStyle="bold"
+                        android:visibility="gone"
+                        app:backgroundTint="#EA580C"
+                        app:cornerRadius="14dp" />
+
+                    <!-- QR Code Display Card -->
+                    <LinearLayout
+                        android:id="@+id/qrCardContainer"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="18dp"
+                        android:background="@drawable/bg_input_dark"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:padding="16dp"
+                        android:visibility="gone">
+
+                        <TextView
+                            android:id="@+id/tvQrLabel"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:textColor="#F8FAFC"
+                            android:textSize="13sp"
+                            android:textStyle="bold"
+                            android:layout_marginBottom="12dp" />
+
+                        <com.google.android.material.card.MaterialCardView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:cardBackgroundColor="#FFFFFF"
+                            app:cardCornerRadius="14dp"
+                            app:cardElevation="0dp">
+
+                            <ImageView
+                                android:id="@+id/ivQrCode"
+                                android:layout_width="228dp"
+                                android:layout_height="228dp"
+                                android:padding="10dp"
+                                android:contentDescription="Session QR Code" />
+                        </com.google.android.material.card.MaterialCardView>
+                    </LinearLayout>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+        </LinearLayout>
+    </ScrollView>
+
+    <!-- ACTIVE LOCKDOWN SCREEN VIEW -->
+    <LinearLayout
+        android:id="@+id/lockedLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#090D16"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="24dp"
+        android:visibility="gone">
+
+        <FrameLayout
+            android:layout_width="76dp"
+            android:layout_height="76dp"
+            android:background="@drawable/bg_lock_badge"
+            android:layout_marginBottom="18dp">
+
+            <ImageView
+                android:layout_width="38dp"
+                android:layout_height="38dp"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_shield_lock"
+                app:tint="#EF4444"
+                android:contentDescription="Locked Shield" />
+        </FrameLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="SESSION LOCKED"
+            android:textColor="#F87171"
+            android:textSize="28sp"
+            android:letterSpacing="0.06"
+            android:textStyle="bold" />
+
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
             android:gravity="center"
-            android:orientation="vertical"
-            android:visibility="gone">
+            android:paddingHorizontal="12dp"
+            android:text="Home screen and all other apps are blocked. Only Phone Calls and SMS Messages are permitted."
+            android:textColor="#94A3B8"
+            android:textSize="14sp"
+            android:lineSpacingExtra="3dp" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="SESSION LOCKED"
-                android:textColor="#C62828"
-                android:textSize="30sp"
-                android:textStyle="bold" />
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="28dp"
+            app:cardBackgroundColor="#111827"
+            app:cardCornerRadius="18dp"
+            app:cardElevation="0dp"
+            app:strokeColor="#1F2937"
+            app:strokeWidth="1dp">
 
-            <TextView
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
                 android:gravity="center"
-                android:text="Only Phone Calls and SMS Messages are permitted until unlocked."
-                android:textColor="#455A64"
-                android:textSize="15sp" />
+                android:orientation="vertical"
+                android:paddingVertical="20dp">
 
-            <TextView
-                android:id="@+id/tvTimer"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginVertical="28dp"
-                android:text="00:00 remaining"
-                android:textColor="#1A237E"
-                android:textSize="26sp"
-                android:textStyle="bold" />
+                <TextView
+                    android:id="@+id/tvTimer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="monospace"
+                    android:text="00:00"
+                    android:textColor="#F8FAFC"
+                    android:textSize="44sp"
+                    android:textStyle="bold" />
 
-            <Button
-                android:id="@+id/btnOpenPhone"
-                android:layout_width="match_parent"
-                android:layout_height="56dp"
-                android:backgroundTint="#1565C0"
-                android:text="Open Phone (Calls)"
-                android:textSize="16sp" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:text="TIME REMAINING"
+                    android:textColor="#64748B"
+                    android:textSize="11sp"
+                    android:letterSpacing="0.12"
+                    android:textStyle="bold" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
 
-            <Button
-                android:id="@+id/btnOpenSms"
-                android:layout_width="match_parent"
-                android:layout_height="56dp"
-                android:layout_marginTop="12dp"
-                android:backgroundTint="#2E7D32"
-                android:text="Open Messages (SMS)"
-                android:textSize="16sp" />
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnOpenPhone"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:text="Open Phone (Calls)"
+            android:textAllCaps="false"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:backgroundTint="#2563EB"
+            app:cornerRadius="14dp"
+            app:icon="@drawable/ic_phone"
+            app:iconGravity="textStart"
+            app:iconPadding="10dp"
+            app:iconTint="#FFFFFF" />
 
-            <Button
-                android:id="@+id/btnScanUnlockQr"
-                android:layout_width="match_parent"
-                android:layout_height="56dp"
-                android:layout_marginTop="32dp"
-                android:backgroundTint="#EF6C00"
-                android:text="Scan Host Unlock QR"
-                android:textSize="16sp" />
-        </LinearLayout>
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnOpenSms"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_marginTop="12dp"
+            android:text="Open Messages (SMS)"
+            android:textAllCaps="false"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:backgroundTint="#16A34A"
+            app:cornerRadius="14dp"
+            app:icon="@drawable/ic_message"
+            app:iconGravity="textStart"
+            app:iconPadding="10dp"
+            app:iconTint="#FFFFFF" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnScanUnlockQr"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_marginTop="28dp"
+            android:text="Scan Host Unlock QR"
+            android:textAllCaps="false"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:backgroundTint="#EA580C"
+            app:cornerRadius="14dp"
+            app:icon="@drawable/ic_qr_scan"
+            app:iconGravity="textStart"
+            app:iconPadding="10dp"
+            app:iconTint="#FFFFFF" />
     </LinearLayout>
-</ScrollView>
+</FrameLayout>

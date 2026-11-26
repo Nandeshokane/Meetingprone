@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Theme.MeetingLock" parent="Theme.Material3.Dark.NoActionBar">
+        <item name="android:windowBackground">#0B1120</item>
+        <item name="android:statusBarColor">#0B1120</item>
+        <item name="android:navigationBarColor">#0B1120</item>
+        <item name="colorPrimary">#3B82F6</item>
+        <item name="colorOnPrimary">#FFFFFF</item>
+        <item name="colorSurface">#111827</item>
+        <item name="colorOnSurface">#F8FAFC</item>
+    </style>
+</resources>

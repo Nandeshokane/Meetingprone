@@ -25,7 +25,7 @@
         android:label="@string/app_name"
         android:roundIcon="@drawable/ic_lock_app"
         android:supportsRtl="true"
-        android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar">
+        android:theme="@style/Theme.MeetingLock">
 
         <activity
             android:name=".MainActivity"

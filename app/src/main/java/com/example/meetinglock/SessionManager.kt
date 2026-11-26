@@ -7,6 +7,7 @@ import android.provider.Telephony
 import android.telecom.TelecomManager
 import android.view.inputmethod.InputMethodManager
 import java.security.MessageDigest
+import java.util.Locale
 
 object SessionManager {
     private const val PREFS = "meeting_lock_prefs"
@@ -28,6 +29,8 @@ object SessionManager {
             .putLong(KEY_END_REALTIME, nowRealtime + durationMs)
             .putLong(KEY_END_WALLTIME, nowWall + durationMs)
             .apply()
+
+        LockAccessibilityService.onLockStateChanged()
     }
 
     fun isLocked(context: Context): Boolean {
@@ -48,13 +51,23 @@ object SessionManager {
         val startRealtime = prefs.getLong(KEY_START_REALTIME, 0L)
         val nowRealtime = SystemClock.elapsedRealtime()
 
-        // If device rebooted, elapsedRealtime resets below startRealtime -> fallback to wall clock
         val remainingMs = if (nowRealtime < startRealtime) {
             prefs.getLong(KEY_END_WALLTIME, 0L) - System.currentTimeMillis()
         } else {
             prefs.getLong(KEY_END_REALTIME, 0L) - nowRealtime
         }
         return (remainingMs / 1000L).coerceAtLeast(0L)
+    }
+
+    fun formatRemainingTime(seconds: Long): String {
+        val hrs = seconds / 3600
+        val mins = (seconds % 3600) / 60
+        val remSec = seconds % 60
+        return if (hrs > 0) {
+            String.format(Locale.US, "%02d:%02d:%02d", hrs, mins, remSec)
+        } else {
+            String.format(Locale.US, "%02d:%02d", mins, remSec)
+        }
     }
 
     fun tryUnlockWithSecret(context: Context, secret: String): Boolean {
@@ -75,6 +88,8 @@ object SessionManager {
             .remove(KEY_END_REALTIME)
             .remove(KEY_END_WALLTIME)
             .apply()
+
+        LockAccessibilityService.onLockStateChanged()
     }
 
     fun sha256(input: String): String {
@@ -96,15 +111,17 @@ object SessionManager {
         }
     }
 
-    fun getAllowedPackages(context: Context): Set<String> {
+    fun getAllowedAppPackages(context: Context): Set<String> {
         val allowed = mutableSetOf(
             context.packageName,
-            // Pixel 7a core Phone, Messages, Keyboard, System UI & Permission Dialogs
+            // Pixel 7a Phone, In-Call UI, Messages, Permission Popups
             "com.google.android.dialer",
-            "com.google.android.apps.messaging",
-            "com.google.android.inputmethod.latin",
-            "com.android.systemui",
+            "com.android.dialer",
             "com.android.server.telecom",
+            "com.android.incallui",
+            "com.google.android.incallui",
+            "com.google.android.apps.messaging",
+            "com.android.mms",
             "com.google.android.permissioncontroller",
             "com.android.permissioncontroller"
         )
