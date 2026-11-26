@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">MeetingLock</string>
+    <string name="accessibility_desc">Restricts your device to Phone and Messages during an active MeetingLock session.</string>
+</resources>
